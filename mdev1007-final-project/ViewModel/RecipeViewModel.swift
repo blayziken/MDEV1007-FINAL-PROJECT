@@ -9,6 +9,9 @@ import Foundation
 
 class RecipesViewModel: ObservableObject {
     @Published private(set) var recipes: [Recipe] = []
+    @Published private(set) var favRecipes: [Recipe] = []
+    
+    @Published var alertItem: AlertItem?
     
     init() {
         recipes = Recipe.all
@@ -16,5 +19,11 @@ class RecipesViewModel: ObservableObject {
     
     func addRecipe(recipe: Recipe) {
         recipes.append(recipe)
+    }
+    
+    func addToFavs(recipe: Recipe) {
+        print("entered here??")
+        favRecipes.append(recipe)
+        self.alertItem = AlertContext.favRecipeSaveSuccess
     }
 }

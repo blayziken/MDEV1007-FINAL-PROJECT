@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct LoginView: View {
+    @State private var pulse = false
     
     @ObservedObject var authViewModel: AuthViewModel = AuthViewModel()
     
@@ -15,16 +16,24 @@ struct LoginView: View {
         NavigationView {
             VStack {
                 Spacer()
-                    .frame( width: 50, height: 50)
+                    .frame( height: 30)
                 
-                Image(systemName: "swirl.circle.righthalf.filled")
+                Image("recipeLogo")
                     .resizable()
-                    .frame( width: 100, height: 100)
+                    .frame( width: 250, height: 220)
                     .foregroundColor(.green.opacity(0.8))
-                
+                    .scaleEffect(pulse ? 1.2 : 1.0)
+//                    .opacity(pulse ? 0.6 : 1.0)
+                    .animation(
+                        Animation.easeInOut(duration: 1).repeatForever(autoreverses: true),
+                        value: pulse
+                    )
+                    .onAppear {
+                        pulse.toggle()
+                    }
                 
                 Spacer()
-                    .frame( width: 50, height: 50)
+                    .frame(height: 30)
                 
                 VStack {
                     

@@ -33,11 +33,15 @@ struct AlertContext {
                                             message: Text("Please ensure your email and password have been filled out."),
                                             dismissButton: .default(Text("OK")))
 
-    static let movieSaveSuccess  = AlertItem(title: Text("Recipe Saved"),
+    static let recipeSaveSuccess  = AlertItem(title: Text("Recipe Saved"),
                                             message: Text("Recipe was successfully saved."),
                                             dismissButton: .default(Text("OK")))
     
-    static let movieSaveError  = AlertItem(title: Text("Error"),
+    static let favRecipeSaveSuccess  = AlertItem(title: Text("Added to Favourites"),
+                                            message: Text("Recipe was successfully added to favourites."),
+                                            dismissButton: .default(Text("OK")))
+    
+    static let recipeSaveError  = AlertItem(title: Text("Error"),
                                             message: Text("Something went wrong, please try again."),
                                             dismissButton: .default(Text("OK")))
     

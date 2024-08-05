@@ -19,7 +19,7 @@ struct CategoryView: View {
     
     var body: some View {
         ScrollView {
-            RecipeList(recipes: recipes, title: "?x")
+            RecipeList(recipes: recipes, title: "")
         }
         .navigationTitle(category.rawValue + "s")
     }

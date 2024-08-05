@@ -10,6 +10,8 @@ import SwiftUI
 struct RecipeView: View {
     var recipe: Recipe
     
+    @EnvironmentObject var recipesVM: RecipesViewModel
+    
     var body: some View {
         ScrollView {
             AsyncImage(url: URL(string: recipe.image)) { image in
@@ -17,9 +19,10 @@ struct RecipeView: View {
                     .resizable()
                     .aspectRatio(contentMode: .fill)
             } placeholder: {
-                Image(systemName: "photo")
+                Image("defaultImage")
                     .resizable()
-                    .scaledToFit()
+//                    .scaledToFit()
+                    .aspectRatio(contentMode: .fill)
                     .frame(width: 100, height: 100, alignment: .center)
                     .foregroundColor(.white.opacity(0.7))
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -41,7 +44,8 @@ struct RecipeView: View {
                     if !recipe.ingredients.isEmpty {
                         VStack(alignment: .leading, spacing: 20) {
                             Text("Ingredients")
-                                .font(.headline)
+                                .font(.title2)
+                                .fontWeight(.semibold)
                             
                             Text(recipe.ingredients)
                         }
@@ -50,17 +54,42 @@ struct RecipeView: View {
                     if !recipe.directions.isEmpty {
                         VStack(alignment: .leading, spacing: 20) {
                             Text("Directions")
-                                .font(.headline)
+                                .font(.title2)
+                                .fontWeight(.bold)
                             
                             Text(recipe.directions)
                         }
                     }
                 }
-                .frame(maxWidth: .infinity, alignment: .leading)
+//                .frame(maxWidth: .infinity, alignment: .leading)
             }
-            .padding(.horizontal)
+            .tint(.blue)
+            .padding(.horizontal, 180)
+            
+            Spacer()
+                .frame(height: 50)
+            
+            Button {
+                recipesVM.addToFavs(recipe: recipe)
+                
+            }label: {
+                Text("Add to Favourites")
+                    .font(.system(size: 22, weight: .bold, design: .default))
+                    .padding()
+                    .frame(width: 250, height: 60)
+                    .foregroundColor(Color.white)
+                    .background(.green)
+                    .cornerRadius(15)
+            }
         }
         .ignoresSafeArea(.container, edges: .top)
+        
+        .alert(item: $recipesVM.alertItem) { alertItem in
+            Alert(title: alertItem.title,
+                  message: alertItem.message,
+                  dismissButton: alertItem.dismissButton)
+            
+        }
     }
 }
 

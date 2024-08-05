@@ -25,9 +25,10 @@ struct RecipeCard: View {
                             .padding()
                     }
             } placeholder: {
-                Image(systemName: "photo")
+                Image("defaultImage")
                     .resizable()
-                    .scaledToFit()
+//                    .scaledToFit()
+                    .aspectRatio(contentMode: .fill)
                     .frame(width: 40, height: 40, alignment: .center)
                     .foregroundColor(.white.opacity(0.7))
                     .frame(maxWidth: .infinity, maxHeight: .infinity)

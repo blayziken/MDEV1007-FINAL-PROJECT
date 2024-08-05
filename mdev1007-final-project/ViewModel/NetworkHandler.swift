@@ -53,7 +53,8 @@ class NetworkHandler: ObservableObject {
     }
     
     // ADD RECIPE
-    func addRecipe(newRecipe: Recipe) {
+    func addRecipe(newRecipe: Recipe, completion: @escaping () -> Void) {
+        
         let newRecipeData = [
             "name": newRecipe.name,
             "image": newRecipe.image,
@@ -69,17 +70,21 @@ class NetworkHandler: ObservableObject {
         
         // creates firebase document to store new item
         let ref = db.collection("recipes").document()
+        
         ref.setData(newRecipeData) { [self] error in
             if let error = error {
                 print(error.localizedDescription)
-                self.saveAlertItem = AlertContext.movieSaveError
+                self.saveAlertItem = AlertContext.recipeSaveError
                 return
             }
         }
-        self.saveAlertItem = AlertContext.movieSaveSuccess
+        
+        self.saveAlertItem = AlertContext.recipeSaveSuccess
         
         // Refresh data
         fetchAllRecipes()
+        
+        completion()
     }
     
 }

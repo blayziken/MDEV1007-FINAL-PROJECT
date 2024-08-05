@@ -6,9 +6,10 @@
 //
 
 import SwiftUI
-
+import PhotosUI
 
 struct AddRecipeView: View {
+    @EnvironmentObject var networkHandler: NetworkHandler
     @EnvironmentObject var recipesVM: RecipesViewModel
     
     @State private var name: String = ""
@@ -18,11 +19,36 @@ struct AddRecipeView: View {
     @State private var directions: String = ""
     @State private var navigateToRecipe = false
     
+    @State private var isLoading = false
+    @State private var isCompleted = false
+    
+    @State private var avatarImage: UIImage?
+    @State private var photosPickerItem: PhotosPickerItem?
+    
     @Environment(\.dismiss) var dismiss
     
     var body: some View {
         NavigationView {
             Form {
+                
+                PhotosPicker(selection: $photosPickerItem, matching: .images) {
+                    Image(uiImage: avatarImage ?? UIImage(named: "noImage")!)
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: 300, height: 150)
+                }
+                .onChange(of: photosPickerItem) { _, _ in
+                    Task {
+                        if let photosPickerItem,
+                           let data = try? await photosPickerItem.loadTransferable(type: Data.self) {
+                            if let image = UIImage(data: data) {
+                                avatarImage = image
+                            }
+                        }
+                        photosPickerItem = nil
+                    }
+                }
+                
                 Section(header: Text("Name")) {
                     TextField("Recipe Name", text: $name)
                 }
@@ -48,6 +74,10 @@ struct AddRecipeView: View {
                 Section(header: Text("Directions")) {
                     TextEditor(text: $directions)
                 }
+                
+//                NavigationLink(destination: HomeView(), isActive: $isCompleted) {
+//                    EmptyView()
+//                }
             }
             .toolbar(content: {
                 ToolbarItem(placement: .navigationBarLeading) {
@@ -60,43 +90,84 @@ struct AddRecipeView: View {
                 }
                 
                 ToolbarItem {
-                    NavigationLink(isActive: $navigateToRecipe) {
-                        RecipeView(recipe: recipesVM.recipes.sorted{ $0.datePublished > $1.datePublished }[0])
-                            .navigationBarBackButtonHidden(true)
-                    } label: {
-                        Button {
-                            saveRecipe()
-                            navigateToRecipe = true
-                        } label: {
-                            Label("Done", systemImage: "checkmark")
-                                .labelStyle(.iconOnly)
+                    
+                    Button {
+                        isLoading = true
+                        let now = Date()
+                        
+                        let dateFormatter = DateFormatter()
+                        dateFormatter.dateFormat = "yyyy-mm-dd"
+                        let datePublished = dateFormatter.string(from: now)
+                        
+                        networkHandler.addRecipe(newRecipe: Recipe(
+                            name: name,
+                            image: "",
+                            description: description,
+                            ingredients: ingredients,
+                            directions: directions,
+                            category: selectedCategory.rawValue,
+                            datePublished: datePublished,
+                            url: ""
+                        )) {
+                            // Completion handler
+                            isLoading = false
+                            isCompleted = true
                         }
+                        
+                        //                            navigateToRecipe = true
+                    } label: {
+                        Label("Done", systemImage: "checkmark")
+                            .labelStyle(.iconOnly)
                     }
                     .disabled(name.isEmpty)
+                    
+                    
+                    // Loader overlay
+                    if isLoading {
+                        Color.black.opacity(0.5).edgesIgnoringSafeArea(.all)
+                        ProgressView("Loading...")
+                            .progressViewStyle(CircularProgressViewStyle())
+                            .scaleEffect(1.5)
+                    }
+                    
+                   
                 }
             })
             .navigationTitle("New Recipe")
             .navigationBarTitleDisplayMode(.inline)
         }
         .navigationViewStyle(.stack)
+        .alert(item: $networkHandler.saveAlertItem) { alertItem in
+            Alert(title: alertItem.title,
+                  message: alertItem.message,
+                  dismissButton: alertItem.dismissButton)
+        }
     }
 }
 
-extension AddRecipeView {
-    private func saveRecipe() {
-        let now = Date()
-        
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-mm-dd"
-        
-        let datePublished = dateFormatter.string(from: now)
-        print(datePublished)
-        
-        let recipe = Recipe(name: name, image: "", description: description, ingredients: ingredients, directions: directions, category: selectedCategory.rawValue, datePublished: datePublished, url: "")
-        
-        recipesVM.addRecipe(recipe: recipe)
-    }
-}
+//extension AddRecipeView {
+//
+//    private func saveRecipe() {
+//        let now = Date()
+//
+//        let dateFormatter = DateFormatter()
+//        dateFormatter.dateFormat = "yyyy-mm-dd"
+//        let datePublished = dateFormatter.string(from: now)
+//        print("Got here 1")
+//        networkHandler.addRecipe(newRecipe: Recipe(
+//            name: name,
+//            image: "",
+//            description: description,
+//            ingredients: ingredients,
+//            directions: directions,
+//            category: selectedCategory.rawValue,
+//            datePublished: datePublished,
+//            url: ""
+//        ))
+//
+//        //        recipesVM.addRecipe(recipe: recipe)
+//    }
+//}
 
 #Preview {
     AddRecipeView()
