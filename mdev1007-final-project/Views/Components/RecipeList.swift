@@ -9,9 +9,14 @@ import SwiftUI
 
 struct RecipeList: View {
     var recipes: [Recipe]
+    var title: String
     
     var body: some View {
-        VStack {
+        VStack(alignment: .leading) {
+            Text(title)
+                .font(.largeTitle)
+                .fontWeight(.bold)
+            
             HStack {
                 Text("\(recipes.count) \(recipes.count > 1 ? "recipes" : "recipe")")
                     .font(.headline)
@@ -36,6 +41,6 @@ struct RecipeList: View {
 
 #Preview {
     ScrollView {
-        RecipeList(recipes: Recipe.all)
+        RecipeList(recipes: Recipe.all, title: "Preview title")
     }
 }
