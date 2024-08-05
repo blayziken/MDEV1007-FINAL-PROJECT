@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		AC7E6F5F2C608D8100743922 /* ll.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7E6F5E2C608D8100743922 /* ll.swift */; };
 		AC82B8C52C6005DC002DEB11 /* mdev1007_final_projectApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC82B8C42C6005DC002DEB11 /* mdev1007_final_projectApp.swift */; };
 		AC82B8C72C6005DC002DEB11 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC82B8C62C6005DC002DEB11 /* ContentView.swift */; };
 		AC82B8C92C6005DF002DEB11 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC82B8C82C6005DF002DEB11 /* Assets.xcassets */; };
@@ -56,7 +55,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		AC7E6F5E2C608D8100743922 /* ll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ll.swift; sourceTree = "<group>"; };
 		AC82B8C12C6005DC002DEB11 /* mdev1007-final-project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "mdev1007-final-project.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC82B8C42C6005DC002DEB11 /* mdev1007_final_projectApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mdev1007_final_projectApp.swift; sourceTree = "<group>"; };
 		AC82B8C62C6005DC002DEB11 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -202,7 +200,6 @@
 				ACC14D9B2C6020F8004CFE6D /* AddRecipeView.swift */,
 				ACC14D9D2C60211E004CFE6D /* RecipeView.swift */,
 				ACC14D9F2C60213A004CFE6D /* CategoryView.swift */,
-				AC7E6F5E2C608D8100743922 /* ll.swift */,
 			);
 			path = Detail;
 			sourceTree = "<group>";
@@ -343,7 +340,6 @@
 				ACC14DA92C6021D2004CFE6D /* RecipeViewModel.swift in Sources */,
 				ACC14D9C2C6020F8004CFE6D /* AddRecipeView.swift in Sources */,
 				ACC14DAC2C60241E004CFE6D /* LoginView.swift in Sources */,
-				AC7E6F5F2C608D8100743922 /* ll.swift in Sources */,
 				ACC14DAE2C602427004CFE6D /* SignUpView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -13,10 +13,18 @@ struct FavouritesView: View {
     var body: some View {
         NavigationView {
             ScrollView {
-                RecipeList(
-                    recipes: recipesVM.favRecipes,
-                    title: ""
-                )
+                
+                if(recipesVM.favRecipes.isEmpty) {
+                    Text("You haven't saved any recipe to your favorites yet.")
+                        .padding(.top, 150)
+                        .padding()
+                } else {
+                    RecipeList(
+                        recipes: recipesVM.favRecipes,
+                        title: ""
+                    )
+                }
+                
             }
             .navigationTitle("Favorites")
         }

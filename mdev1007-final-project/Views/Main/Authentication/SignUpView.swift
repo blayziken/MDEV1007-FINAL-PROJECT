@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct SignUpView: View {
+    @State private var pulse = false
+
     @ObservedObject var authViewModel: AuthViewModel = AuthViewModel()
 
     var body: some View {
