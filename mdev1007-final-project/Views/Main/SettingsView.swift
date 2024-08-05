@@ -6,12 +6,29 @@
 //
 
 import SwiftUI
+import FirebaseAuth
 
 struct SettingsView: View {
     var body: some View {
         NavigationView {
-            Text("v1.0.0")
-                .navigationTitle("Settings")
+            
+            VStack {
+                
+                Text("v1.0.0")
+                    .navigationTitle("Settings")
+                
+                Button{
+                    try! Auth.auth().signOut()
+                }label: {
+                    Text("Logout")
+                        .font(.system(size: 24, weight: .bold, design: .default))
+                        .frame(maxWidth: .infinity, maxHeight: 57)
+                        .foregroundColor(Color.white)
+                        .background(.green)
+                        .cornerRadius(15)
+                }
+                .padding(.horizontal, 60)
+            }
         }
         .navigationViewStyle(.stack)
     }

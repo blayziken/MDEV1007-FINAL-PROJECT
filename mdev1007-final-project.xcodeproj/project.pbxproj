@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		AC5C17FE2C61645D0004DD51 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5C17FD2C61645D0004DD51 /* AppDelegate.swift */; };
-		AC5C18002C6166420004DD51 /* AA.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5C17FF2C6166420004DD51 /* AA.swift */; };
 		AC82B8C52C6005DC002DEB11 /* mdev1007_final_projectApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC82B8C42C6005DC002DEB11 /* mdev1007_final_projectApp.swift */; };
 		AC82B8C72C6005DC002DEB11 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC82B8C62C6005DC002DEB11 /* ContentView.swift */; };
 		AC82B8C92C6005DF002DEB11 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC82B8C82C6005DF002DEB11 /* Assets.xcassets */; };
@@ -58,7 +57,6 @@
 
 /* Begin PBXFileReference section */
 		AC5C17FD2C61645D0004DD51 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		AC5C17FF2C6166420004DD51 /* AA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AA.swift; sourceTree = "<group>"; };
 		AC82B8C12C6005DC002DEB11 /* mdev1007-final-project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "mdev1007-final-project.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC82B8C42C6005DC002DEB11 /* mdev1007_final_projectApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mdev1007_final_projectApp.swift; sourceTree = "<group>"; };
 		AC82B8C62C6005DC002DEB11 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -164,7 +162,6 @@
 				ACC14DA12C602151004CFE6D /* Components */,
 				ACC14D9A2C6020EE004CFE6D /* Detail */,
 				ACC14D8D2C60203F004CFE6D /* Main */,
-				AC5C17FF2C6166420004DD51 /* AA.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -330,7 +327,6 @@
 			files = (
 				ACC14DA52C60217E004CFE6D /* RecipeCard.swift in Sources */,
 				ACC14D8F2C60204B004CFE6D /* TabBar.swift in Sources */,
-				AC5C18002C6166420004DD51 /* AA.swift in Sources */,
 				ACC14D992C6020B1004CFE6D /* SettingsView.swift in Sources */,
 				AC894F642C6046D700418BB7 /* NetworkHandler.swift in Sources */,
 				ACC14D912C602082004CFE6D /* HomeView.swift in Sources */,
