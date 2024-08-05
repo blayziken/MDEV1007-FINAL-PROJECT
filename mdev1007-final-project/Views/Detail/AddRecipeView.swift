@@ -75,9 +75,9 @@ struct AddRecipeView: View {
                     TextEditor(text: $directions)
                 }
                 
-//                NavigationLink(destination: HomeView(), isActive: $isCompleted) {
-//                    EmptyView()
-//                }
+                //                NavigationLink(destination: HomeView(), isActive: $isCompleted) {
+                //                    EmptyView()
+                //                }
             }
             .toolbar(content: {
                 ToolbarItem(placement: .navigationBarLeading) {
@@ -114,7 +114,18 @@ struct AddRecipeView: View {
                             isCompleted = true
                         }
                         
-                        //                            navigateToRecipe = true
+                        // Send Notification
+                        let content = UNMutableNotificationContent()
+                        
+                        content.title = "Success"
+                        content.subtitle = "Your recipe has been uploaded chef!"
+                        content.sound = UNNotificationSound.default
+                        
+                        // show notification with a delay of 5 seconds.
+                        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+                        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+                        
+                        UNUserNotificationCenter.current().add(request)
                     } label: {
                         Label("Done", systemImage: "checkmark")
                             .labelStyle(.iconOnly)
@@ -130,7 +141,7 @@ struct AddRecipeView: View {
                             .scaleEffect(1.5)
                     }
                     
-                   
+                    
                 }
             })
             .navigationTitle("New Recipe")
