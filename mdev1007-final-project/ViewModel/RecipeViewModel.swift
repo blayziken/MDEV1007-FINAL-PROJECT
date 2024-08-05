@@ -22,7 +22,6 @@ class RecipesViewModel: ObservableObject {
     }
     
     func addToFavs(recipe: Recipe) {
-        print("entered here??")
         favRecipes.append(recipe)
         self.alertItem = AlertContext.favRecipeSaveSuccess
     }

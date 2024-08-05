@@ -9,15 +9,24 @@ import SwiftUI
 
 struct SignUpView: View {
     @ObservedObject var authViewModel: AuthViewModel = AuthViewModel()
-    
+
     var body: some View {
         NavigationView {
             VStack {
                 
-                Image(systemName: "swirl.circle.righthalf.filled")
+                Image("recipeLogo")
                     .resizable()
-                    .frame( width: 100, height: 100)
+                    .frame( width: 250, height: 220)
                     .foregroundColor(.green.opacity(0.8))
+                    .scaleEffect(pulse ? 1.2 : 1.0)
+//                    .opacity(pulse ? 0.6 : 1.0)
+                    .animation(
+                        Animation.easeInOut(duration: 1).repeatForever(autoreverses: true),
+                        value: pulse
+                    )
+                    .onAppear {
+                        pulse.toggle()
+                    }
                 
                 
                 Spacer()
