@@ -16,7 +16,8 @@ struct FavouritesView: View {
                 
                 if(recipesVM.favRecipes.isEmpty) {
                     Text("You haven't saved any recipe to your favorites yet.")
-                        .padding(.top, 150)
+                        .multilineTextAlignment(.center)
+                        .padding(.top, 200)
                         .padding()
                 } else {
                     RecipeList(
